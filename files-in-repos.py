@@ -26,13 +26,17 @@ print("\n".join(sys.path))
 
 # COMMAND ----------
 
-from sample import n_to_mth
-n_to_mth(3, 4)
+import sample
+sample.n_to_mth(3, 4)
+#run a np command
+sample.np.version.version
 
 # COMMAND ----------
 
-from utils.sample2 import cube_root
-cube_root(8)
+import utils.sample2
+utils.sample2.cube_root(8)
+#run a pandas command
+utils.sample2.np.show_versions()
 
 # COMMAND ----------
 
@@ -104,44 +108,3 @@ with open('data/winequality-red.csv', 'r') as file:
 # COMMAND ----------
 
 # MAGIC %sh head -10 data/winequality-red.csv
-
-# COMMAND ----------
-
-# MAGIC %md ### Load file with pandas
-
-# COMMAND ----------
-
-import pandas as pd
-
-df= pd.read_csv("data/winequality-red.csv")
-display(df)
-
-# COMMAND ----------
-
-# MAGIC %md ### Load file with Koalas
-# MAGIC Koalas requires the absolute file path.
-
-# COMMAND ----------
-
-import os
-import databricks.koalas as ks
-
-df= ks.read_csv(f"file:{os.getcwd()}/data/winequality-red.csv") # "file:" prefix and absolute file path are required for Koalas
-display(df)
-
-# COMMAND ----------
-
-# MAGIC %md ### Load file with PySpark
-# MAGIC PySpark requires the absolute file path.
-
-# COMMAND ----------
-
-import os
-
-df=spark.read.csv(f"file:{os.getcwd()}/data/winequality-red.csv", header=True) # "file:" prefix and absolute file path are required for PySpark
-display(df)
-
-# COMMAND ----------
-
-# MAGIC %md ## Limitations
-# MAGIC You cannot programmatically write to a file.
